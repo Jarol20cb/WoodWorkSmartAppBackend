@@ -1,7 +1,6 @@
 package com.wwsa.woodworksmartap.servicesinterfaces;
 
 import com.wwsa.woodworksmartap.entities.Color;
-import com.wwsa.woodworksmartap.entities.FurnitureType;
 
 import java.util.List;
 

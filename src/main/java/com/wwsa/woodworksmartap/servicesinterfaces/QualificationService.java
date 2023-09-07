@@ -1,7 +1,6 @@
 package com.wwsa.woodworksmartap.servicesinterfaces;
 
 import com.wwsa.woodworksmartap.entities.Qualification;
-import com.wwsa.woodworksmartap.entities.User;
 
 import java.util.List;
 

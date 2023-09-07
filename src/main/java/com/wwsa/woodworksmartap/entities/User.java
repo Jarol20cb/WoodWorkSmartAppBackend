@@ -3,8 +3,9 @@ package com.wwsa.woodworksmartap.entities;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "users")
+//@Entity
+@MappedSuperclass
+//@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
