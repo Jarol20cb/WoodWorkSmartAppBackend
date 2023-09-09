@@ -1,7 +1,4 @@
 package com.wwsa.woodworksmartap.dtos;
-
-import javax.persistence.Column;
-
 public class QualificationDTO {
     private int QualificationID;
     private int Qualification;

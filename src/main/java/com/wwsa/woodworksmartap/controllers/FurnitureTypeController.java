@@ -5,6 +5,7 @@ import com.wwsa.woodworksmartap.entities.FurnitureType;
 import com.wwsa.woodworksmartap.servicesinterfaces.FurnitureTypeService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class FurnitureTypeController {
     private FurnitureTypeService ftS;
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void registrar(@RequestBody FurnitureTypeDTO dto){
         ModelMapper m = new ModelMapper();
         FurnitureType fT = m.map(dto, FurnitureType.class);
@@ -24,6 +26,7 @@ public class FurnitureTypeController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<FurnitureTypeDTO> Listar(){
         return ftS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();

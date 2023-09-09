@@ -5,6 +5,7 @@ import com.wwsa.woodworksmartap.entities.Qualification;
 import com.wwsa.woodworksmartap.servicesinterfaces.QualificationService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,12 +18,14 @@ public class QualificationController {
     private QualificationService qL;
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void registrar(@RequestBody QualificationDTO dto){
         ModelMapper m = new ModelMapper();
         Qualification c = m.map(dto, Qualification.class);
         qL.insert(c);
     }
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<QualificationDTO> Listar()
     {
         return qL.list().stream().map(x->{

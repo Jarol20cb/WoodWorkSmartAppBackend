@@ -5,6 +5,7 @@ import com.wwsa.woodworksmartap.entities.PaymentType;
 import com.wwsa.woodworksmartap.servicesinterfaces.IPaymentTypeService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,12 +18,14 @@ public class PaymentTypeController {
     private IPaymentTypeService uS;
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void registrar(@RequestBody PaymentTypeDTO dto){
         ModelMapper m = new ModelMapper();
         PaymentType c = m.map(dto, PaymentType.class);
         uS.insert(c);
     }
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<PaymentTypeDTO> Listar()
     {
         return uS.list().stream().map(x->{

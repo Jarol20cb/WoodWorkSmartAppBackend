@@ -1,8 +1,7 @@
 package com.wwsa.woodworksmartap.controllers;
-
-import com.wwsa.woodworksmartap.dtos.WoodTypeDTO;
-import com.wwsa.woodworksmartap.entities.WoodType;
-import com.wwsa.woodworksmartap.servicesinterfaces.WoodTypeService;
+import com.wwsa.woodworksmartap.dtos.OrderDTO;
+import com.wwsa.woodworksmartap.entities.Order;
+import com.wwsa.woodworksmartap.servicesinterfaces.OrderService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,43 +11,44 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/wood_type")
-public class WoodTypeController {
+@RequestMapping("/orders")
+public class OrderController {
     @Autowired
-    private WoodTypeService wtS;
-
+    private OrderService oR;
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void registrar(@RequestBody WoodTypeDTO dto){
+    public void registrar(@RequestBody OrderDTO dto){
         ModelMapper m = new ModelMapper();
-        WoodType wt = m.map(dto, WoodType.class);
-        wtS.insert(wt);
+        Order c = m.map(dto, Order.class);
+        oR.insert(c);
     }
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public List<WoodTypeDTO> Listar()
+    public List<OrderDTO> Listar()
     {
-        return wtS.list().stream().map(x->{
+        return oR.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
-            return m.map(x,WoodTypeDTO.class);
+            return m.map(x,OrderDTO.class);
         }).collect(Collectors.toList());
     }
+
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") Integer id){
-        wtS.delete(id);
+        oR.delete(id);
     }
 
     @GetMapping("/{id}")
-    public WoodTypeDTO ListarId(@PathVariable("id") Integer id){
+    public OrderDTO ListarId(@PathVariable("id") Integer id){
         ModelMapper m = new ModelMapper();
-        WoodTypeDTO dto = m.map((wtS.listId(id)),WoodTypeDTO.class);
+        OrderDTO dto = m.map((oR.listId(id)),OrderDTO.class);
         return dto;
     }
 
     @PutMapping
-    public void Update(@RequestBody WoodTypeDTO dto){
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void Update(@RequestBody OrderDTO dto){
         ModelMapper m = new ModelMapper();
-        WoodType wt = m.map(dto, WoodType.class);
-        wtS.insert(wt);
+        Order c = m.map(dto, Order.class);
+        oR.insert(c);
     }
 }

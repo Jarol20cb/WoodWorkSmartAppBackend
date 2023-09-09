@@ -18,6 +18,7 @@ public class ColorController {
     private ColorService Clor;
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void registrar(@RequestBody ColorDTO dto){
         ModelMapper m = new ModelMapper();
         Color c = m.map(dto, Color.class);
