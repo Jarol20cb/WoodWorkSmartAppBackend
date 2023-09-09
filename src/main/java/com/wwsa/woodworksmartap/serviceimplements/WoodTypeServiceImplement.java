@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+//hubo problemas aca
 @Service
 public class WoodTypeServiceImplement implements WoodTypeService {
     @Autowired

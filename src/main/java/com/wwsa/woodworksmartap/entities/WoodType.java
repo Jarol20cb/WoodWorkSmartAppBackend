@@ -3,7 +3,7 @@ package com.wwsa.woodworksmartap.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "wood_type")
+@Table(name = "WoodType")
 public class WoodType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

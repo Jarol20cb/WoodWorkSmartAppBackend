@@ -1,6 +1,5 @@
 package com.wwsa.woodworksmartap.dtos;
 
-import javax.persistence.Column;
 import java.time.LocalDate;
 
 public class UserDTO {
