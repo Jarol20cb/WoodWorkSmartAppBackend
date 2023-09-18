@@ -38,4 +38,8 @@ public class CustomerFurnitureController {
         xd.delete(id);
     }
 
+    @GetMapping("/highestQualification")
+    public List<CustomerFurniture> getHighestQualification() {
+        return xd.findAllWithHighestQualification();
+    }
 }

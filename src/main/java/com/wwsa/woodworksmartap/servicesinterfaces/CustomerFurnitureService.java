@@ -11,4 +11,6 @@ public interface CustomerFurnitureService {
     public List<CustomerFurniture> list(); //2
 
     public void delete(int idcustomerfurniture);
+
+    public List<CustomerFurniture> findAllWithHighestQualification();
 }

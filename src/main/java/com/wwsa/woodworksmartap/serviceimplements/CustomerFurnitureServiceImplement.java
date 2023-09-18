@@ -29,4 +29,9 @@ public class CustomerFurnitureServiceImplement implements CustomerFurnitureServi
     public void delete(int idcustomerfurniture) {
         gaa.deleteById(idcustomerfurniture);
     }
+
+    @Override
+    public List<CustomerFurniture> findAllWithHighestQualification() {
+        return gaa.findAllWithHighestQualification();
+    }
 }
