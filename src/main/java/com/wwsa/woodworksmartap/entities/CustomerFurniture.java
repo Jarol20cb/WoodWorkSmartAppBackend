@@ -17,15 +17,14 @@ public class CustomerFurniture{
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private  Customer customer;
-    @ManyToOne
-    @JoinColumn(name = "QualificationID")
-    private Qualification qualification;
+
+    private int qualification;
     @Column (name = "Comment", nullable = false,length = 255)
     private String Comment;
     public CustomerFurniture(){   //17
     }
 
-    public CustomerFurniture(int idcustomerfurniture, Furniture furniture, Customer customer, Qualification qualification, String comment) {
+    public CustomerFurniture(int idcustomerfurniture, Furniture furniture, Customer customer, int qualification, String comment) {
         this.idcustomerfurniture = idcustomerfurniture;
         this.furniture = furniture;
         this.customer = customer;
@@ -57,11 +56,11 @@ public class CustomerFurniture{
         this.customer = customer;
     }
 
-    public Qualification getQualification() {
+    public int getQualification() {
         return qualification;
     }
 
-    public void setQualification(Qualification qualification) {
+    public void setQualification(int qualification) {
         this.qualification = qualification;
     }
 

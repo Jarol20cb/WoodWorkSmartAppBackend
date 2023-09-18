@@ -2,18 +2,13 @@ package com.wwsa.woodworksmartap.dtos;
 
 import com.wwsa.woodworksmartap.entities.Customer;
 import com.wwsa.woodworksmartap.entities.Furniture;
-import com.wwsa.woodworksmartap.entities.Qualification;
-
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 public class CustomerFurnitureDTO {
     private int idcustomerfurniture;
     private Furniture furniture;
 
     private  Customer customer;
-    private Qualification qualification;
+    private int qualification;
     private String Comment;
 
     public int getIdcustomerfurniture() {
@@ -40,11 +35,11 @@ public class CustomerFurnitureDTO {
         this.customer = customer;
     }
 
-    public Qualification getQualification() {
+    public int getQualification() {
         return qualification;
     }
 
-    public void setQualification(Qualification qualification) {
+    public void setQualification(int qualification) {
         this.qualification = qualification;
     }
 
