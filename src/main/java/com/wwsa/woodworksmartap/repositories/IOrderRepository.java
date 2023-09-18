@@ -1,9 +1,8 @@
 package com.wwsa.woodworksmartap.repositories;
-
-import com.wwsa.woodworksmartap.entities.Qualification;
+import com.wwsa.woodworksmartap.entities.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IQualificationRepository extends JpaRepository<Qualification,Integer> {
+public interface IOrderRepository extends JpaRepository<Order, Integer> {
 }

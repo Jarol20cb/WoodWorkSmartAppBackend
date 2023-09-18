@@ -5,7 +5,6 @@ import com.wwsa.woodworksmartap.entities.Carpenter;
 import com.wwsa.woodworksmartap.servicesinterfaces.CarpenterService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +17,6 @@ public class CarpenterController {
     private CarpenterService Cs;
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
     public void registrar(@RequestBody CarpenterDTO dto){
         ModelMapper m = new ModelMapper();
         Carpenter c = m.map(dto, Carpenter.class);
@@ -26,7 +24,6 @@ public class CarpenterController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
     public List<CarpenterDTO> Listar(){
         return Cs.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
@@ -35,7 +32,6 @@ public class CarpenterController {
     }
 
     @DeleteMapping("/id")
-    @PreAuthorize("hasAuthority('ADMIN')")
     public void eliminar(@PathVariable("id") Integer id){
         Cs.delete(id);
     }
@@ -48,7 +44,6 @@ public class CarpenterController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
     public void Update(@RequestBody CarpenterDTO dto){
         ModelMapper m = new ModelMapper();
         Carpenter c = m.map(dto, Carpenter.class);

@@ -4,7 +4,6 @@ import com.wwsa.woodworksmartap.entities.Customer;
 import com.wwsa.woodworksmartap.servicesinterfaces.CustomerService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +16,6 @@ public class CustomerController {
     private CustomerService cMr;
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
     public void registrar(@RequestBody CustomerDTO dto){
         ModelMapper m = new ModelMapper();
         Customer c = m.map(dto, Customer.class);
@@ -25,7 +23,6 @@ public class CustomerController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
     public List<CustomerDTO> Listar(){
         return cMr.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
@@ -34,7 +31,6 @@ public class CustomerController {
     }
 
     @DeleteMapping("/id")
-    @PreAuthorize("hasAuthority('ADMIN')")
     public void eliminar(@PathVariable("id") Integer id){
         cMr.delete(id);
     }
@@ -47,7 +43,6 @@ public class CustomerController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
     public void Update(@RequestBody CustomerDTO dto){
         ModelMapper m = new ModelMapper();
         Customer c = m.map(dto, Customer.class);
