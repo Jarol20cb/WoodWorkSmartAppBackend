@@ -1,8 +1,7 @@
 package com.wwsa.woodworksmartap.controllers;
-
-import com.wwsa.woodworksmartap.dtos.UserDTO;
-import com.wwsa.woodworksmartap.entities.User;
-import com.wwsa.woodworksmartap.servicesinterfaces.UserService;
+import com.wwsa.woodworksmartap.dtos.OrderDTO;
+import com.wwsa.woodworksmartap.entities.Order;
+import com.wwsa.woodworksmartap.servicesinterfaces.OrderService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,43 +11,44 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/orders")
+public class OrderController {
     @Autowired
-    private UserService uS;
-
+    private OrderService oR;
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void registrar(@RequestBody UserDTO dto){
+    public void registrar(@RequestBody OrderDTO dto){
         ModelMapper m = new ModelMapper();
-        User c = m.map(dto, User.class);
-        uS.insert(c);
+        Order c = m.map(dto, Order.class);
+        oR.insert(c);
     }
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public List<UserDTO> Listar()
+    public List<OrderDTO> Listar()
     {
-        return uS.list().stream().map(x->{
+        return oR.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
-            return m.map(x,UserDTO.class);
+            return m.map(x,OrderDTO.class);
         }).collect(Collectors.toList());
     }
+
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") Integer id){
-        uS.delete(id);
+        oR.delete(id);
     }
 
     @GetMapping("/{id}")
-    public UserDTO ListarId(@PathVariable("id") Integer id){
+    public OrderDTO ListarId(@PathVariable("id") Integer id){
         ModelMapper m = new ModelMapper();
-        UserDTO dto = m.map((uS.listId(id)),UserDTO.class);
+        OrderDTO dto = m.map((oR.listId(id)),OrderDTO.class);
         return dto;
     }
 
     @PutMapping
-    public void Update(@RequestBody UserDTO dto){
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void Update(@RequestBody OrderDTO dto){
         ModelMapper m = new ModelMapper();
-        User c = m.map(dto, User.class);
-        uS.insert(c);
+        Order c = m.map(dto, Order.class);
+        oR.insert(c);
     }
 }
