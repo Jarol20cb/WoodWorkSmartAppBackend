@@ -1,6 +1,5 @@
 package com.wwsa.woodworksmartap.dtos;
 
-import com.wwsa.woodworksmartap.entities.Color;
 import com.wwsa.woodworksmartap.entities.Customer;
 import com.wwsa.woodworksmartap.entities.FurnitureType;
 import com.wwsa.woodworksmartap.entities.WoodType;
@@ -10,8 +9,8 @@ public class FurnitureDesignDTO {
     private int FurnitureDesignId;
     private FurnitureType furniture_type;
     private WoodType wood_type;
-    private Color color;
     private Customer customer;
+    private String Color;
     private float Width;
     private float Height;
     private float Depth;
@@ -41,20 +40,20 @@ public class FurnitureDesignDTO {
         this.wood_type = wood_type;
     }
 
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
     public Customer getCustomer() {
         return customer;
     }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public String getColor() {
+        return Color;
+    }
+
+    public void setColor(String color) {
+        Color = color;
     }
 
     public float getWidth() {

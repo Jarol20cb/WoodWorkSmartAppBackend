@@ -1,7 +1,6 @@
 package com.wwsa.woodworksmartap.serviceimplements;
 
 import com.wwsa.woodworksmartap.entities.FurnitureDesign;
-import com.wwsa.woodworksmartap.entities.Order;
 import com.wwsa.woodworksmartap.repositories.IFurnitureDesignRepository;
 import com.wwsa.woodworksmartap.servicesinterfaces.FurnitureDesignService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,5 @@
 package com.wwsa.woodworksmartap.servicesinterfaces;
-
 import com.wwsa.woodworksmartap.entities.FurnitureDesign;
-import com.wwsa.woodworksmartap.entities.Order;
 
 import java.util.List;
 

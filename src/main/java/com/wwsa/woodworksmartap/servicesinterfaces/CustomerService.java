@@ -7,4 +7,5 @@ public interface CustomerService {
     public List<Customer> list();
     public void delete(int CustomerID);
     public Customer listId(int CustomerID);
+    public List<String[]> CountOrderByDni();
 }

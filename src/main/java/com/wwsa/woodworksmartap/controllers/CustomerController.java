@@ -6,7 +6,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import com.wwsa.woodworksmartap.dtos.CustomerDniDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,5 +54,21 @@ public class CustomerController {
         ModelMapper m = new ModelMapper();
         Customer c = m.map(dto, Customer.class);
         cMr.insert(c);
+    }
+    @GetMapping("/orders")
+    public List<CustomerDniDTO> getCountOrderByDni() {
+        List<String[]> countOrderByDni = cMr.CountOrderByDni();
+        List<CustomerDniDTO> customerDniDTOList = new ArrayList<>();
+
+        for (String[] data : countOrderByDni) {
+            if (data.length >= 2) {
+                CustomerDniDTO customerDniDTO = new CustomerDniDTO();
+                customerDniDTO.setDni(Integer.parseInt(data[1]));
+                customerDniDTO.setQuantityOrder(Integer.parseInt(data[1]));
+                customerDniDTOList.add(customerDniDTO);
+            }
+        }
+
+        return customerDniDTOList;
     }
 }

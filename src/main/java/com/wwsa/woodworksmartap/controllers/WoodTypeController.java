@@ -5,6 +5,7 @@ import com.wwsa.woodworksmartap.entities.WoodType;
 import com.wwsa.woodworksmartap.servicesinterfaces.WoodTypeService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,12 +18,14 @@ public class WoodTypeController {
     private WoodTypeService wtS;
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void registrar(@RequestBody WoodTypeDTO dto){
         ModelMapper m = new ModelMapper();
         WoodType wt = m.map(dto, WoodType.class);
         wtS.insert(wt);
     }
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<WoodTypeDTO> Listar()
     {
         return wtS.list().stream().map(x->{

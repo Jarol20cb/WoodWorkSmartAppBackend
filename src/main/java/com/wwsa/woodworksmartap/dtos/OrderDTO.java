@@ -1,37 +1,46 @@
 package com.wwsa.woodworksmartap.dtos;
-
 import com.wwsa.woodworksmartap.entities.Customer;
 import com.wwsa.woodworksmartap.entities.PaymentType;
-
 import java.time.LocalDate;
 
 public class OrderDTO {
-    private int idOrder;
-
-    private double TotalPrice;
-
+    private int OrderId;
+    private int TotalPrice;
+    private PaymentType payment;
+    private Customer customer;
     private int TotalQuantity;
-
     private LocalDate OrderDate;
 
-    private Customer customer;
-
-    private PaymentType paymentType;
-
-    public int getIdOrder() {
-        return idOrder;
+    public int getOrderId() {
+        return OrderId;
     }
 
-    public void setIdOrder(int idOrder) {
-        this.idOrder = idOrder;
+    public void setOrderId(int orderId) {
+        OrderId = orderId;
     }
 
-    public double getTotalPrice() {
+    public int getTotalPrice() {
         return TotalPrice;
     }
 
-    public void setTotalPrice(double totalPrice) {
+    public void setTotalPrice(int totalPrice) {
         TotalPrice = totalPrice;
+    }
+
+    public PaymentType getPayment() {
+        return payment;
+    }
+
+    public void setPayment(PaymentType payment) {
+        this.payment = payment;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public int getTotalQuantity() {
@@ -48,21 +57,5 @@ public class OrderDTO {
 
     public void setOrderDate(LocalDate orderDate) {
         OrderDate = orderDate;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public PaymentType getPaymentType() {
-        return paymentType;
-    }
-
-    public void setPaymentType(PaymentType paymentType) {
-        this.paymentType = paymentType;
     }
 }

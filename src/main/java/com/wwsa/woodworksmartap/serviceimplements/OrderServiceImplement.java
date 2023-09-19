@@ -1,6 +1,7 @@
 package com.wwsa.woodworksmartap.serviceimplements;
 
 import com.wwsa.woodworksmartap.entities.Order;
+import com.wwsa.woodworksmartap.entities.PaymentType;
 import com.wwsa.woodworksmartap.repositories.IOrderRepository;
 import com.wwsa.woodworksmartap.servicesinterfaces.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,26 +11,22 @@ import java.util.List;
 
 @Service
 public class OrderServiceImplement implements OrderService {
-
     @Autowired
-    private IOrderRepository oR;
+    private IOrderRepository or;
     @Override
     public void insert(Order order) {
-        oR.save(order);
+        or.save(order);
     }
-
     @Override
     public List<Order> list() {
-        return oR.findAll();
+        return or.findAll();
     }
-
     @Override
-    public void delete(int idOrder) {
-        oR.deleteById(idOrder);
+    public void delete(int OrderId) {
+        or.deleteById(OrderId);
     }
-
     @Override
-    public Order listId(int idOrder) {
-        return oR.findById(idOrder).orElse(new Order());
+    public Order listId(int OrderId) {
+        return or.findById(OrderId).orElse(new Order());
     }
 }

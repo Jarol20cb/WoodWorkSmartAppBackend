@@ -15,11 +15,11 @@ public class FurnitureDesign {
     @JoinColumn(name = "WoodTypeId")
     private WoodType wood_type;
     @ManyToOne
-    @JoinColumn(name = "ColorId")
-    private Color color;
-    @ManyToOne
     @JoinColumn(name = "CustomerId")
     private Customer customer;
+
+    @Column (name = "Color", nullable = false, length = 100)
+    private String Color;
     @Column(name = "Width", nullable = false, length = 100)
     private float Width;
     @Column(name = "Height", nullable = false, length = 100)
@@ -32,12 +32,12 @@ public class FurnitureDesign {
     public FurnitureDesign() {
     }
 
-    public FurnitureDesign(int furnitureDesignId, FurnitureType furniture_type, WoodType wood_type, Color color, Customer customer, float width, float height, float depth, int estimate) {
+    public FurnitureDesign(int furnitureDesignId, FurnitureType furniture_type, WoodType wood_type, Customer customer, String color, float width, float height, float depth, int estimate) {
         FurnitureDesignId = furnitureDesignId;
         this.furniture_type = furniture_type;
         this.wood_type = wood_type;
-        this.color = color;
         this.customer = customer;
+        Color = color;
         Width = width;
         Height = height;
         Depth = depth;
@@ -68,20 +68,20 @@ public class FurnitureDesign {
         this.wood_type = wood_type;
     }
 
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
     public Customer getCustomer() {
         return customer;
     }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public String getColor() {
+        return Color;
+    }
+
+    public void setColor(String color) {
+        Color = color;
     }
 
     public float getWidth() {

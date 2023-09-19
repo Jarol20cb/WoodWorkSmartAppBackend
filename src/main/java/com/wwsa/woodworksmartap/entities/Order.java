@@ -9,21 +9,16 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int OrderId;
-
     @Column(name = "TotalPrice", nullable = false, length = 100)
     private int TotalPrice;
-
     @ManyToOne
     @JoinColumn(name = "idPayment")
     private PaymentType payment;
-
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
-
     @Column(name = "TotalQuantity", nullable = false, length = 100)
     private int TotalQuantity;
-
     @Column(name = "OrderDate", nullable = false)
     private LocalDate OrderDate;
 

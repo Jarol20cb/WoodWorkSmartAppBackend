@@ -33,5 +33,10 @@ public class CustomerServiceImplement implements CustomerService {
         return cM.findById(CustomerID).orElse(new Customer());
     }
 
+    @Override
+    public List<String[]> CountOrderByDni() {
+        return cM.countOrderByDni();
+    }
+
 
 }
