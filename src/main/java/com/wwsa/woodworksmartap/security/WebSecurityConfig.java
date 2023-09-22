@@ -57,7 +57,7 @@ public class WebSecurityConfig {
         httpSecurity
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/authenticate").permitAll() //.hasAuthority("ADMIN")
+                .antMatchers("/authenticate", "/register").permitAll() // Permitir el acceso a la ruta de registro
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
