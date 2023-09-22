@@ -18,14 +18,14 @@ public class FurnitureOrderController {
     @Autowired
     private FurnitureOrderService foS;
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void registrar(@RequestBody FurnitureOrderDTO dto){
         ModelMapper m = new ModelMapper();
         FurnitureOrder fo = m.map(dto, FurnitureOrder.class);
         foS.insert(fo);
     }
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CUSTOMER', 'CARPENTER')")
     public List<FurnitureOrderDTO> Listar(){
         return foS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
@@ -33,7 +33,7 @@ public class FurnitureOrderController {
         }).collect(Collectors.toList());
     }
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void Update(@RequestBody FurnitureOrderDTO dto){
         ModelMapper m = new ModelMapper();
         FurnitureOrder fo = m.map(dto, FurnitureOrder.class);

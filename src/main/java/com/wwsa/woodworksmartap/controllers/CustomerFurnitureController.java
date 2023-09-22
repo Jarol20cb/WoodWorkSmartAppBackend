@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.stream.Collectors;
 @RestController
@@ -17,14 +18,14 @@ public class CustomerFurnitureController {
     private CustomerFurnitureService xd;
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CUSTOMER')")
     public void registrar(@RequestBody CustomerFurnitureDTO dto){
         ModelMapper m = new ModelMapper();
         CustomerFurniture c = m.map(dto, CustomerFurniture.class);
         xd.insert(c);
     }
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CUSTOMER', 'CARPENTER')")
     public List<CustomerFurnitureDTO> Listar(){
         return xd.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
@@ -33,13 +34,15 @@ public class CustomerFurnitureController {
     }
 
     @DeleteMapping("/id")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CUSTOMER')")
     public void eliminar(@PathVariable("id") Integer id){
         xd.delete(id);
     }
 
     @GetMapping("/highestQualification")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CUSTOMER')")
     public List<CustomerFurniture> getHighestQualification() {
         return xd.findAllWithHighestQualification();
     }
+
 }

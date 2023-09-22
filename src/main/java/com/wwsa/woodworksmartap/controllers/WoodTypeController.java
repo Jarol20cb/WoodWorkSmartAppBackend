@@ -18,14 +18,14 @@ public class WoodTypeController {
     private WoodTypeService wtS;
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void registrar(@RequestBody WoodTypeDTO dto){
         ModelMapper m = new ModelMapper();
         WoodType wt = m.map(dto, WoodType.class);
         wtS.insert(wt);
     }
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CUSTOMER', 'CARPENTER')")
     public List<WoodTypeDTO> Listar()
     {
         return wtS.list().stream().map(x->{
@@ -34,11 +34,13 @@ public class WoodTypeController {
         }).collect(Collectors.toList());
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void eliminar(@PathVariable("id") Integer id){
         wtS.delete(id);
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public WoodTypeDTO ListarId(@PathVariable("id") Integer id){
         ModelMapper m = new ModelMapper();
         WoodTypeDTO dto = m.map((wtS.listId(id)),WoodTypeDTO.class);
@@ -46,6 +48,7 @@ public class WoodTypeController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void Update(@RequestBody WoodTypeDTO dto){
         ModelMapper m = new ModelMapper();
         WoodType wt = m.map(dto, WoodType.class);

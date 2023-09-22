@@ -31,4 +31,14 @@ public class FurnitureDesignServiceImplement implements FurnitureDesignService {
     public FurnitureDesign listId(int idFurnitureDesign) {
         return fdR.findById(idFurnitureDesign).orElse(new FurnitureDesign());
     }
+
+    @Override
+    public List<String[]> woodCount() {
+        return fdR.woodCount();
+    }
+
+    @Override
+    public List<String[]> countByFurnitureType() {
+        return fdR.countByFurnitureType();
+    }
 }

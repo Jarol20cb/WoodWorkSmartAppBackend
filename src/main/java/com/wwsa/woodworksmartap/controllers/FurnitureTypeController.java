@@ -18,7 +18,7 @@ public class FurnitureTypeController {
     private FurnitureTypeService ftS;
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void registrar(@RequestBody FurnitureTypeDTO dto){
         ModelMapper m = new ModelMapper();
         FurnitureType fT = m.map(dto, FurnitureType.class);
@@ -26,7 +26,7 @@ public class FurnitureTypeController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CUSTOMER', 'CARPENTER')")
     public List<FurnitureTypeDTO> Listar(){
         return ftS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
@@ -35,11 +35,13 @@ public class FurnitureTypeController {
     }
 
     @DeleteMapping("/id")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void eliminar(@PathVariable("id") Integer id){
         ftS.delete(id);
     }
 
     @GetMapping("/id")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public FurnitureTypeDTO ListarId(@PathVariable("id") Integer id){
         ModelMapper m = new ModelMapper();
         FurnitureTypeDTO dto = m.map((ftS.listId(id)), FurnitureTypeDTO.class);
@@ -47,6 +49,7 @@ public class FurnitureTypeController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void Update(@RequestBody FurnitureTypeDTO dto){
         ModelMapper m = new ModelMapper();
         FurnitureType fT = m.map(dto, FurnitureType.class);

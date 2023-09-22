@@ -8,4 +8,6 @@ public interface FurnitureDesignService {
     public List<FurnitureDesign> list();
     public void delete(int idFurnitureDesign);
     public FurnitureDesign listId(int idFurnitureDesign);
+    public List<String[]>woodCount();
+    public List<String[]> countByFurnitureType();
 }

@@ -6,6 +6,7 @@ import com.wwsa.woodworksmartap.servicesinterfaces.IFurnitureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -33,4 +34,10 @@ public class FurnitureServiceImplement implements IFurnitureService {
     public Furniture listId(int furnitureId) {
         return fR.findById(furnitureId).orElse(new Furniture());
     }
+
+    @Override
+    public List<Furniture> findByManufacturingDate(LocalDate manufacturingDate) {
+        return fR.findByManufacturingDate(manufacturingDate);
+    }
+
 }

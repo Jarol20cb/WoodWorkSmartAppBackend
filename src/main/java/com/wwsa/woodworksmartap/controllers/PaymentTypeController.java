@@ -18,14 +18,14 @@ public class PaymentTypeController {
     private IPaymentTypeService uS;
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void registrar(@RequestBody PaymentTypeDTO dto){
         ModelMapper m = new ModelMapper();
         PaymentType c = m.map(dto, PaymentType.class);
         uS.insert(c);
     }
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CUSTOMER', 'CARPENTER')")
     public List<PaymentTypeDTO> Listar()
     {
         return uS.list().stream().map(x->{
@@ -35,11 +35,13 @@ public class PaymentTypeController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void eliminar(@PathVariable("id") Integer id){
         uS.delete(id);
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public PaymentTypeDTO ListarId(@PathVariable("id") Integer id){
         ModelMapper m = new ModelMapper();
         PaymentTypeDTO dto = m.map((uS.listId(id)),PaymentTypeDTO.class);
@@ -47,6 +49,7 @@ public class PaymentTypeController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void Update(@RequestBody PaymentTypeDTO dto){
         ModelMapper m = new ModelMapper();
         PaymentType c = m.map(dto, PaymentType.class);

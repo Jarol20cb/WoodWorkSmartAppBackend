@@ -18,7 +18,7 @@ public class CarpenterController {
     private CarpenterService Cs;
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CARPENTER')")
     public void registrar(@RequestBody CarpenterDTO dto){
         ModelMapper m = new ModelMapper();
         Carpenter c = m.map(dto, Carpenter.class);
@@ -26,7 +26,7 @@ public class CarpenterController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CUSTOMER', 'CARPENTER')")
     public List<CarpenterDTO> Listar(){
         return Cs.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
@@ -35,12 +35,13 @@ public class CarpenterController {
     }
 
     @DeleteMapping("/id")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void eliminar(@PathVariable("id") Integer id){
         Cs.delete(id);
     }
 
     @GetMapping("/id")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CUSTOMER', 'CARPENTER')")
     public CarpenterDTO ListarId(@PathVariable("id") Integer id){
         ModelMapper m = new ModelMapper();
         CarpenterDTO dto = m.map((Cs.listId(id)), CarpenterDTO.class);
@@ -48,7 +49,7 @@ public class CarpenterController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CARPENTER')")
     public void Update(@RequestBody CarpenterDTO dto){
         ModelMapper m = new ModelMapper();
         Carpenter c = m.map(dto, Carpenter.class);
