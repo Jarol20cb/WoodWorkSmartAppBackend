@@ -5,8 +5,8 @@ import com.wwsa.woodworksmartap.entities.User;
 import com.wwsa.woodworksmartap.servicesinterfaces.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,12 +18,14 @@ public class UserController {
     private UserService uS;
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void registrar(@RequestBody UserDTO dto){
         ModelMapper m = new ModelMapper();
         User c = m.map(dto, User.class);
         uS.insert(c);
     }
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<UserDTO> Listar()
     {
         return uS.list().stream().map(x->{
@@ -35,6 +37,7 @@ public class UserController {
     public void eliminar(@PathVariable("id") Integer id){
         uS.delete(id);
     }
+
     @GetMapping("/{id}")
     public UserDTO ListarId(@PathVariable("id") Integer id){
         ModelMapper m = new ModelMapper();
@@ -42,4 +45,10 @@ public class UserController {
         return dto;
     }
 
+    @PutMapping
+    public void Update(@RequestBody UserDTO dto){
+        ModelMapper m = new ModelMapper();
+        User c = m.map(dto, User.class);
+        uS.insert(c);
+    }
 }
