@@ -20,7 +20,7 @@ public class FurnitureDesignController {
     @Autowired
     private FurnitureDesignService fdS;
 
-    //jlnl
+    //
     @PostMapping
     @PreAuthorize("hasAnyAuthority('ADMIN', 'CUSTOMER')")
     public void registrar(@RequestBody FurnitureDesignDTO dto){
@@ -30,7 +30,7 @@ public class FurnitureDesignController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('ADMIN', 'CUSTOMER', 'CARPENTER')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CARPENTER', 'CUSTOMER')")
     public List<FurnitureDesignDTO> Listar(){
         return fdS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();

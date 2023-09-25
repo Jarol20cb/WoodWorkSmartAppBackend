@@ -12,6 +12,8 @@ import java.util.List;
 public interface ICustomerFurnitureRepository extends JpaRepository<CustomerFurniture, Integer> {
 
     // Query para obtener los datos de con la mayor calificacion
+    // JAROL
+    // jarol
     @Query(nativeQuery = true, value = "SELECT * FROM customerforniture WHERE qualification = (SELECT MAX(qualification) FROM customerforniture)")
     List<CustomerFurniture> findAllWithHighestQualification();
 

@@ -36,7 +36,7 @@ public class UserRegistrerController {
     public ResponseEntity<?> registerUser(@RequestBody RegistrationRequest registrationRequest) throws Exception {
         // Comprobar si el nombre de usuario ya existe
         if (userRepo.findByUsername(registrationRequest.getUsername()) != null) {
-            throw new Exception("Username already exists");
+            throw new Exception("nombre de usuario ya existe");
         }
 
         // Crear nuevo usuario
