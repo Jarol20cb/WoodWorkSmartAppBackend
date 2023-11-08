@@ -55,7 +55,6 @@ public class UserRegistrerController {
             newRole.setUser(newUser);
             roleRepo.save(newRole);
         }
-
         return ResponseEntity.ok("Usuario registrado con exito :)");
     }
 }
